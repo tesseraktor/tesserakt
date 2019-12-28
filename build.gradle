@@ -13,6 +13,15 @@ allprojects {
   apply plugin: 'maven-publish'
   apply plugin: 'checkstyle'
 
+  repositories {
+    google()
+    mavenLocal()
+    mavenCentral()
+    maven {
+      url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+  }
+
   java {
     withSourcesJar()
     withJavadocJar()
