@@ -4,6 +4,11 @@ plugins {
 
 rootProject.name = 'tesserakt'
 
+include 'tesserakt-inventory'
+include 'tesserakt-game'
+include 'tesserakt-metrics'
+include 'tesserakt-locale'
+
 rootProject.children.each { project ->
   project.buildFileName = "${project.name}.gradle"
   assert project.projectDir.isDirectory()
