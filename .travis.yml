@@ -37,6 +37,7 @@ addons:
 ###########################
 script:
   - ./gradlew build
+  - ./gradlew check
   - ./gradlew --scan -s
   - ./gradlew codeCoverageReport
   - ./gradlew sonarqube
