@@ -13,6 +13,11 @@ allprojects {
   apply plugin: 'maven-publish'
   apply plugin: 'checkstyle'
 
+  java {
+    withSourcesJar()
+    withJavadocJar()
+  }
+
   checkstyle {
     maxWarnings = 0
     ignoreFailures = false
