@@ -12,6 +12,7 @@ allprojects {
   apply plugin: 'java-library'
   apply plugin: 'maven-publish'
   apply plugin: 'checkstyle'
+  apply plugin: 'jacoco'
 
   repositories {
     google()
@@ -38,5 +39,20 @@ allprojects {
 sonarqube {
   properties {
     property "sonar.projectKey", "tesseraktor_tesserakt"
+  }
+}
+
+task codeCoverageReport(type: JacocoReport) {
+  executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+  subprojects.each {
+    sourceSets it.sourceSets.main
+  }
+
+  reports {
+    xml.enabled = true
+    html.enabled = true
+    xml.destination = new File("${buildDir}/reports/jacoco/report.xml")
+    html.destination = new File("${buildDir}/reports/jacoco/report.html")
   }
 }
