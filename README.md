@@ -10,4 +10,4 @@ Superior minecraft minigame framework featuring declarative approaches. Provides
 
 |        | Build Status                                                  |
 |--------|---------------------------------------------------------------|
-| Master | https://travis-ci.com/tesseraktor/tesserakt.svg?branch=master |
+| Master | [![Build Status](https://travis-ci.com/tesseraktor/tesserakt.svg?branch=master)](https://travis-ci.com/tesseraktor/tesserakt) |
