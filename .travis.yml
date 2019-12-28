@@ -1,0 +1,51 @@
+######################################
+### Configure programming language ###
+######################################
+language: java
+
+##################################
+### Make sure using Oracle JDK ###
+##################################
+jdk:
+  - oraclejdk13
+
+###################################
+### Disable Email notifications ###
+###################################
+notifications:
+  email: false
+
+###############
+### Caching ###
+###############
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+#################
+### SonarQube ###
+#################
+addons:
+  sonarcloud:
+    organization: "tesseraktor"
+    token:
+      secure: aPsxffdXfyAH9z35kj0GVSRxnM09yEmWILe+NxYAxKpAazR12F8m+dVq2cEzAdQAijYrX/wgQ7S8weRqzLsWJQz88P3SNTLWu/0envGDdaAGMZqPMfrinNEUGfHMwN9r5cK2drTKi54C+m+u+UZybc9dluFUCnSxNeuadQMPbfeIetsYSDhw5zSqFBXWIUwk63EP3oEl1IzTGJmNJq2ihQiVmOBsUl0aY5TeoY8hyZtdIQrWHzzfIGK79bwDA3FB3UdzW/PWKwvuugJjCa7aRXc1O6bPU1pLGYsUi5F2bQjuBXkVPMyo2tDJutXaydm2DEfkHvhuWWAT5j/WmbiAmBmpvos3IHoaBFCRZL7OR/9Gi+l6YHcZAO9kJ6FzIOgc0k3O+MA6tBleYTCZR6oAXokCZRleNXOgFThk9ZpN+6e0CDYyl8JXCE4UTIaG2JvcNk/PjWeWlwR/8J8arTKxWeFr6NAfbgGlnNK397HmsmKoDicDQgmB8s4ADoAKBOXYg9GXTAm6hd7J8FcHTSUNTW5NYY7XBvDl1rJNC7mPx2ZhJuNgpYIPQ7smqXu6fN7UA4F+xT4l6iZq3t80fTpxTEN8MLbNsXhjHGBnOMVYoMJ0CvrZrm3RUPP0+1Rt3YsC78W6nwZkmeOiU7SgXAjeEmtVNHtw/ykGTfNh1wef3gw=
+
+###########################
+### Actual Build Script ###
+###########################
+script:
+  - ./gradlew build
+  - ./gradlew --scan -s
+  - ./gradlew codeCoverageReport
+  - ./gradlew sonarqube
+
+##################
+### Deployment ###
+##################
+deploy:
+  provider: script
+  script: ./gradlew publish
+  on:
+    tags: true
